@@ -3,10 +3,9 @@ import os
 # Carpeta actual
 carpeta_actual = os.path.dirname(os.path.abspath(__file__))
 
-# Listar todos los archivos .txt
+# 1. Convertir todos los .txt en .html
 txt_files = [f for f in os.listdir(carpeta_actual) if f.endswith(".txt")]
 
-# Convertir cada .txt en .html
 for archivo in txt_files:
     ruta_txt = os.path.join(carpeta_actual, archivo)
     nombre_base = os.path.splitext(archivo)[0]
@@ -22,6 +21,10 @@ for archivo in txt_files:
 <head>
   <meta charset="utf-8">
   <title>{nombre_base}</title>
+  <style>
+    body {{ font-family: Arial, sans-serif; background: #fdfdfd; color: #333; line-height: 1.6; max-width: 800px; margin: auto; padding: 20px; }}
+    p {{ margin-bottom: 15px; }}
+  </style>
 </head>
 <body>
 """
@@ -39,7 +42,7 @@ for archivo in txt_files:
 
     print(f"Convertido: {archivo} → {nombre_base}.html")
 
-# Ahora generar el índice
+# 2. Generar index.html con enlaces a todos los .html
 html_files = [f for f in os.listdir(carpeta_actual) if f.endswith(".html") and f != "index.html"]
 
 index_html = """<!DOCTYPE html>
